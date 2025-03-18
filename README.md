@@ -7,6 +7,7 @@
 [![msspace](https://img.shields.io/badge/🤖-Space%20demo-blue)](https://modelscope.cn/studios/modelscope/E2-F5-TTS)
 [![lab](https://img.shields.io/badge/X--LANCE-Lab-grey?labelColor=lightgrey)](https://x-lance.sjtu.edu.cn/)
 [![lab](https://img.shields.io/badge/Peng%20Cheng-Lab-grey?labelColor=lightgrey)](https://www.pcl.ac.cn)
+
 <!-- <img src="https://github.com/user-attachments/assets/12d7749c-071a-427c-81bf-b87b91def670" alt="Watermark" style="width: 40px; height: auto"> -->
 
 **F5-TTS**: Diffusion Transformer with ConvNeXt V2, faster trained and inference.
@@ -18,6 +19,7 @@
 ### Thanks to all the contributors !
 
 ## News
+
 - **2025/03/12**: 🔥 F5-TTS v1 base model with better training and inference performance. [Few demo](https://swivid.github.io/F5-TTS_updates).
 - **2024/10/08**: F5-TTS & E2 TTS base models on [🤗 Hugging Face](https://huggingface.co/SWivid/F5-TTS), [🤖 Model Scope](https://www.modelscope.cn/models/SWivid/F5-TTS_Emilia-ZH-EN), [🟣 Wisemodel](https://wisemodel.cn/models/SJTU_X-LANCE/F5-TTS_Emilia-ZH-EN).
 
@@ -60,7 +62,7 @@ conda activate f5-tts
 > # Install pytorch with your XPU version, e.g.
 > # Intel® Deep Learning Essentials or Intel® oneAPI Base Toolkit must be installed
 > pip install torch torchaudio --index-url https://download.pytorch.org/whl/test/xpu
-> 
+>
 > # Intel GPU support is also available through IPEX (Intel® Extension for PyTorch)
 > # IPEX does not require the Intel® Deep Learning Essentials or Intel® oneAPI Base Toolkit
 > # See: https://pytorch-extension.intel.com/installation?request=platform
@@ -81,13 +83,13 @@ conda activate f5-tts
 ### Then you can choose one from below:
 
 > ### 1. As a pip package (if just for inference)
-> 
+>
 > ```bash
 > pip install f5-tts
 > ```
-> 
+>
 > ### 2. Local editable (if also do training, finetuning)
-> 
+>
 > ```bash
 > git clone https://github.com/SWivid/F5-TTS.git
 > cd F5-TTS
@@ -96,6 +98,7 @@ conda activate f5-tts
 > ```
 
 ### Docker usage also available
+
 ```bash
 # Build from Dockerfile
 docker build -t f5tts:v1 .
@@ -103,7 +106,6 @@ docker build -t f5tts:v1 .
 # Or pull from GitHub Container Registry
 docker pull ghcr.io/swivid/f5-tts:main
 ```
-
 
 ## Inference
 
@@ -178,7 +180,6 @@ f5-tts_infer-cli -c src/f5_tts/infer/examples/multi/story.toml
 - In order to have better generation results, take a moment to read [detailed guidance](src/f5_tts/infer).
 - The [Issues](https://github.com/SWivid/F5-TTS/issues?q=is%3Aissue) are very useful, please try to find the solution by properly searching the keywords of problem encountered. If no answer found, then feel free to open an issue.
 
-
 ## Training
 
 ### 1. With Hugging Face Accelerate
@@ -194,9 +195,7 @@ f5-tts_finetune-gradio
 
 Read [training & finetuning guidance](src/f5_tts/train) for more instructions.
 
-
 ## [Evaluation](src/f5_tts/eval)
-
 
 ## Development
 
@@ -207,14 +206,13 @@ pip install pre-commit
 pre-commit install
 ```
 
-When making a pull request, before each commit, run: 
+When making a pull request, before each commit, run:
 
 ```bash
 pre-commit run --all-files
 ```
 
 Note: Some model components have linting exceptions for E722 to accommodate tensor notation
-
 
 ## Acknowledgements
 
@@ -230,15 +228,18 @@ Note: Some model components have linting exceptions for E722 to accommodate tens
 - [F5-TTS-ONNX](https://github.com/DakeQQ/F5-TTS-ONNX) ONNX Runtime version by [DakeQQ](https://github.com/DakeQQ)
 
 ## Citation
+
 If our work and codebase is useful for you, please cite as:
+
 ```
 @article{chen-etal-2024-f5tts,
-      title={F5-TTS: A Fairytaler that Fakes Fluent and Faithful Speech with Flow Matching}, 
+      title={F5-TTS: A Fairytaler that Fakes Fluent and Faithful Speech with Flow Matching},
       author={Yushen Chen and Zhikang Niu and Ziyang Ma and Keqi Deng and Chunhui Wang and Jian Zhao and Kai Yu and Xie Chen},
       journal={arXiv preprint arXiv:2410.06885},
       year={2024},
 }
 ```
+
 ## License
 
 Our code is released under MIT License. The pre-trained models are licensed under the CC-BY-NC license due to the training data Emilia, which is an in-the-wild dataset. Sorry for any inconvenience this may cause.
