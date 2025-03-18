@@ -17,6 +17,7 @@ This will:
 
 The complex text example includes:
 
+- Multilingual text (Spanish, Japanese, Arabic, Greek, Korean)
 - Mathematical notation (equations, symbols)
 - Special characters (musical notation, phonetic symbols)
 - Different formatting styles
