@@ -12,8 +12,14 @@ Run the basic TTS example:
 
 This will:
 
-1. Generate speech from text without reference audio
-2. Save the output to `data/output/sample_output.wav`
+1. Generate speech from simple text: `simple_output.wav`
+2. Generate speech from complex multilingual text with mathematical notation: `complex_output.wav`
+
+The complex text example includes:
+
+- Mathematical notation (equations, symbols)
+- Special characters (musical notation, phonetic symbols)
+- Different formatting styles
 
 ## Voice Cloning Demo
 
@@ -53,6 +59,13 @@ docker exec f5-tts-f5-tts-1 f5-tts_infer-cli \
   --ref_text "Transcript of the reference audio" \
   --gen_text "Text to synthesize with the cloned voice" \
   --output_file /workspace/data/output/cloned_voice.wav
+
+# Complex text with enhanced quality settings
+docker exec f5-tts-f5-tts-1 f5-tts_infer-cli \
+  --gen_text "Complex multilingual text here" \
+  --output_file /workspace/data/output/enhanced_output.wav \
+  --nfe_step 32 \
+  --cfg_strength 2.5
 ```
 
 ## CLI Parameters
@@ -74,3 +87,19 @@ For a complete list of options, run:
 ```bash
 docker exec f5-tts-f5-tts-1 f5-tts_infer-cli --help
 ```
+
+## Text Formatting Tips
+
+F5-TTS supports various formatting features:
+
+### Speech Styles
+
+- `{Whisper}` - Whispered speech
+- `{Excited}` - Excited, energetic speech
+- `{Sad}` - Sad, melancholic speech
+
+### Special Handling for Complex Text
+
+- Mathematical symbols and equations are usually read aloud
+- For multilingual text, make sure your text is properly UTF-8 encoded
+- Special characters like musical notation may be handled differently depending on the model
