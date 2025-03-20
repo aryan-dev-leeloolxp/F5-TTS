@@ -6,14 +6,20 @@ This can be run inside the Docker container.
 
 import os
 import subprocess
+from math_text_converter import convert_math_to_speech_text
 
 # Output directory
 OUTPUT_DIR = "/workspace/data/output"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-def run_tts(text, output_filename, model="F5TTS_v1_Base", extra_args=None):
+def run_tts(text, output_filename, model="F5TTS_v1_Base", extra_args=None, convert_math=True):
     """Run F5-TTS with the given text and save to the given output file."""
     output_file = os.path.join(OUTPUT_DIR, output_filename)
+    
+    # Convert mathematical formulas to readable text if requested
+    if convert_math:
+        text = convert_math_to_speech_text(text)
+        print("Math formulas converted to readable text")
     
     # Base command
     cmd = [
@@ -43,7 +49,7 @@ def main():
     
     # Example 1: Simple text
     simple_text = "{Whisper} Hello! This is a demonstration of F5-TTS text-to-speech synthesis running in Docker on MacOS M3."
-    run_tts(simple_text, "simple_output.wav")
+    run_tts(simple_text, "simple_output.wav", convert_math=False)  # No math to convert here
     
     # Example 2: Complex multilingual text with mathematical notation
     complex_text = """
@@ -77,9 +83,36 @@ For details contact: Professor María at m.gutierrez@lab.edu
 or Dr. Yamada at yamada@lab.jp
 """
     # Run with more NFE steps for better quality on complex text
-    run_tts(complex_text, "complex_output.wav", extra_args=["--nfe_step", "32", "--cfg_strength", "2.5"])
+    # Also convert math formulas to readable text
+    run_tts(complex_text, "complex_output_with_math_conversion.wav", 
+            extra_args=["--nfe_step", "32", "--cfg_strength", "2.5"],
+            convert_math=True)
+    
+    # Generate the same text without math conversion for comparison
+    run_tts(complex_text, "complex_output_without_math_conversion.wav", 
+            extra_args=["--nfe_step", "32", "--cfg_strength", "2.5"],
+            convert_math=False)
+    
+    # Example 3: Text with purely mathematical content for demonstration
+    math_text = """
+Here are some key equations in physics and mathematics:
+1. Einstein's energy-mass equivalence: E = mc²
+2. Newton's second law: F = ma
+3. Pythagorean theorem: a² + b² = c²
+4. Euler's identity: e^(iπ) + 1 = 0
+5. Maxwell's equation: ∇ × B = μ₀J + μ₀ε₀∂E/∂t
+6. Wave equation: ∂²u/∂t² = c²∇²u
+7. Schrödinger equation: iℏ∂Ψ/∂t = ĤΨ
+8. Fourier transform: F(ω) = ∫f(t)e^(-iωt)dt
+"""
+    # Run TTS on mathematical text with conversion
+    run_tts(math_text, "math_equations_converted.wav", 
+            extra_args=["--nfe_step", "32"], 
+            convert_math=True)
     
     print("\nAll samples have been generated. You can find them in the './data/output' directory.")
+    print("Files with '_with_math_conversion' in their names have mathematical formulas converted to readable text.")
+    print("Files with '_without_math_conversion' contain the original mathematical notation.")
 
 if __name__ == "__main__":
     main() 
